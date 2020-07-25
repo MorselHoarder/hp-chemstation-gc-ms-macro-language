@@ -2,6 +2,22 @@
     "name": "hp-chemstation-gc-ms-macro-language",
     "displayName": "HP Chemstation GC/MS Macro Language",
     "description": "Extension for the HP Chemstation Macro Language for GC/MS systems to enable Syntax highlighting.",
+    "publisher": "Andrew Schult",
+    "icon": "images/ICON.png",
+    "galleryBanner": {
+        "color": "#C80000",
+        "theme": "dark"
+    },
+    "license": "SEE LICENSE IN LICENSE.txt",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/MorselHoarder/hp-chemstation-gc-ms-macro-language"
+    },
+    "bugs": {
+        "url": "https://github.com/MorselHoarder/hp-chemstation-gc-ms-macro-language/issues",
+        "email": "schult.andrew@gmail.com"
+    },
+    "homepage": "https://github.com/MorselHoarder/hp-chemstation-gc-ms-macro-language/blob/master/README.md",
     "version": "1.0.0",
     "engines": {
         "vscode": "^1.46.0"
@@ -9,6 +25,7 @@
     "categories": [
         "Programming Languages"
     ],
+    "keywords": ["agilent","hewlett-packard","masshunter","chemstation","chromatography"],
     "contributes": {
         "languages": [
             {
