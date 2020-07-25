@@ -23,7 +23,7 @@ Language extension for Hewlet-Packard/Agilent's Chemstation Macro language for G
 
 ## Requirements
  
-VSCode 1.42 or later
+VSCode 1.46.0 or later.
 
 ## Extension Settings
 

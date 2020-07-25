@@ -1,4 +1,6 @@
 .vscode/**
 .vscode-test/**
+images/**
 .gitignore
+package_copy.json
 vsc-extension-quickstart.md

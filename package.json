@@ -2,7 +2,7 @@
     "name": "hp-chemstation-gc-ms-macro-language",
     "displayName": "HP Chemstation GC/MS Macro Language",
     "description": "Extension for the HP Chemstation Macro Language for GC/MS systems to enable Syntax highlighting.",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "engines": {
         "vscode": "^1.46.0"
     },
@@ -30,32 +30,7 @@
                 "scopeName": "source.chemmac",
                 "path": "./syntaxes/chemmac.tmLanguage.json"
             }
-        ],
-        "semanticTokenScopes": [
-            {
-                "language": "chemmac",
-                "scopes": {
-                    "parameter": ["variable.parameter.chemmac"]
-                }
-            }
-        ],
-        "configuration":[
-            {
-                "title": "MSD Chemstation GC/MS",
-                "properties": {
-                    "chemmac.boldSupportVariables": {
-                        "markdownDescription": "Specifies if `system` and `reserved` variables should be in bold font. Creates a global `editor.tokenColorCustomization` setting for specific textmate scopes.",
-                        "type": "boolean",
-                        "default": true
-                    }
-                }
-            }
-        ],
-        "configurationDefaults": {
-            "[chemmac]": {
-                "chemmac.boldSupportVariables": true
-            }
-        }
+        ]
     },
     "devDependencies": {
         "js-yaml": "^3.14.0"

@@ -1,3 +1,6 @@
 /stp.js
 /test regexes.txt
 /testmacro.mac
+/package_copy.json
+/node_modules
+/.vscode
