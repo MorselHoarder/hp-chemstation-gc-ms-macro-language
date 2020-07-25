@@ -11,7 +11,7 @@
     "license": "SEE LICENSE IN LICENSE.txt",
     "repository": {
         "type": "git",
-        "url": "https://github.com/MorselHoarder/hp-chemstation-gc-ms-macro-language"
+        "url": "https://github.com/MorselHoarder/hp-chemstation-gc-ms-macro-language.git"
     },
     "bugs": {
         "url": "https://github.com/MorselHoarder/hp-chemstation-gc-ms-macro-language/issues",
