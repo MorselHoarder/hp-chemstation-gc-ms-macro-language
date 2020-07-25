@@ -2,7 +2,7 @@
     "name": "hp-chemstation-gc-ms-macro-language",
     "displayName": "HP Chemstation GC/MS Macro Language",
     "description": "Extension for the HP Chemstation Macro Language for GC/MS systems to enable Syntax highlighting.",
-    "publisher": "Andrew Schult",
+    "publisher": "AndrewSchult",
     "icon": "images/ICON.png",
     "galleryBanner": {
         "color": "#C80000",
