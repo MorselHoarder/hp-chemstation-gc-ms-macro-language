@@ -1,0 +1,35 @@
+{
+    "comments": {
+        "lineComment": "!"
+    },
+    "brackets": [
+        ["[", "]"],
+        ["(", ")"]
+    ],
+    "autoClosingPairs": [
+        ["[", "]"],
+        ["(", ")"],
+        { "open": "\"", "close": "\"", "notIn": ["strings", "comments"] },
+        { "open": "'", "close": "'", "notIn": ["strings", "comments"] },
+        { "open": "`", "close": "'", "notIn": ["comments"] }
+    ],
+    "autoCloseBefore": ":,=])>< \n\t",
+    "surroundingPairs": [
+        ["[", "]"],
+        ["(", ")"],
+        ["\"", "\""],
+        ["'", "'"],
+        ["`", "'"]
+    ],
+    "wordPattern": "(-?\\d*\\.\\d\\w*-?\\w*)|([^\\`\\~\\!\\@\\#\\%\\^\\&\\*\\(\\)\\-\\=\\+\\[\\{\\]\\}\\\\\\|\\;\\:\\'\\\"\\,\\.\\<\\>\\/\\?\\s]+)",
+    "indentationRules": {
+        "increaseIndentPattern": {
+          "pattern": "^\\s*((IF|NAME|WHILE|ELSE)(?![\\w\\$]))[^\\n]*$",
+          "flags": "i"
+        },
+        "decreaseIndentPattern": {
+          "pattern": "^\\s*((ENDWHILE|ENDIF|ELSE|NAME)(?![\\w\\$]))[^\\n]*$",
+          "flags": "i"
+        }
+      }
+}

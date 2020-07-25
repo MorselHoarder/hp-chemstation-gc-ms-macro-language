@@ -1,0 +1,1022 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Chemstation Macro",
+	"scopeName": "source.chemmac",
+	"patterns": [
+		{
+			"include": "#entity"
+		},
+		{
+			"include": "#logic"
+		},
+		{
+			"include": "#storage"
+		},
+		{
+			"include": "#commandsICTune"
+		},
+		{
+			"include": "#commandsDACommon"
+		},
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#statements"
+		},
+		{
+			"include": "#staticRules"
+		},
+		{
+			"include": "#variables"
+		}
+	],
+	"repository": {
+		"logic": {
+			"patterns": [{
+				"begin": "^[\\s]*(?i:(if))(?![\\w\\$])",
+				"beginCaptures": {
+					"1": {
+						"name": "keyword.control.chemmac"
+					}
+				},
+				"end": "$",
+				"patterns": [
+					{"include": "#keywords"},
+					{"include": "#staticRules"},
+					{"include": "#variables"}
+				]
+			},
+			{
+				"begin": "^[\\s]*(?i:(while))(?![\\w\\$])",
+				"beginCaptures": {
+					"1": {
+						"name": "keyword.control.chemmac"
+					}
+				},
+				"end": "$",
+				"patterns": [
+					{"include": "#keywords"},
+					{"include": "#staticRules"},
+					{"include": "#variables"}
+				]
+			},
+			{
+				"begin": "^[\\s]*(?i:(endwhile|endif|else|return))(?![\\w\\$])",
+				"beginCaptures": {"1": {"name": "keyword.control.chemmac"}},
+				"end": "(?=\\!)|$",
+				"patterns": [
+					{"include": "#comments"},
+					{
+						"match": "[\\S]+",
+						"name": "invalid.illegal.chemmac"
+					}
+				]
+			},
+			{
+				"begin": "^[\\s]*(?i:(macro|runmac))(?![\\w\\$])",
+				"beginCaptures": {"1": {"name": "storage.modifier.function.chemmac"}},
+				"end": "(?=\\!)|$",
+				"patterns": [
+					{"include": "#staticRules"},
+					{
+						"match": "(?<=[\\s,])(?i:(g|go))\\b",
+						"name": "keyword.other.chemmac"
+					},
+					{
+						"name": "variable.other.chemmac",
+						"match": "[_a-zA-Z][_a-zA-Z0-9]*[\\$]?"
+					}
+				]
+			},
+			{
+				"begin": "^[\\s]*(?i:(on[ _]error))(?![\\w\\$])",
+				"beginCaptures": {
+					"1": {
+						"name": "keyword.control.chemmac"
+					}
+				},
+				"end": "$",
+				"patterns": [
+					{"include": "#keywords"},
+					{"include": "#staticRules"},
+					{
+						"name": "support.function.chemmac",
+						"match": "[_a-zA-Z][_a-zA-Z0-9]*[\\$]?[\\s]+(?![\\[\\=])"
+					},
+					{
+						"name": "variable.other.chemmac",
+						"match": "[_a-zA-Z][_a-zA-Z0-9]*[\\$]?[\\s]*(?=[\\[\\=])"
+					},
+					{"include": "#variables"}
+				]
+			},
+			{
+				"begin": "^[\\s]*(?i:(generate[ _]error))(?![\\w\\$])",
+				"beginCaptures": {
+					"1": {
+						"name": "keyword.control.chemmac"
+					}
+				},
+				"end": "$",
+				"patterns": [
+					{"include": "#keywords"},
+					{"include": "#staticRules"},
+					{"include": "#variables"}
+				]
+			}]
+		},
+		"commandsICTune": {
+			"patterns": [
+			{
+				"begin": "^[\\s]*(?i:((ms)?open))\\s",
+				"beginCaptures": {
+					"1": {
+						"name": "support.function.chemmac"
+					}
+				},
+				"end": "$",
+				"patterns": [
+					{
+						"match": "\\b(?i:(?:for (?:append|output|input))|as)\\b",
+						"name": "keyword.other.chemmac"
+					},
+					{"include": "#keywords"},
+					{"include": "#staticRules"},
+					{"include": "#variables"}
+				]
+			},
+			{
+				"begin": "^[\\s]*(?i:(x?datanalysis))\\s",
+				"beginCaptures": {
+					"1": {
+						"name": "support.function.chemmac"
+					}
+				},
+				"end": "$",
+				"patterns": [
+					{
+						"match": "\\b(?i:quit|icon)\\b",
+						"name": "keyword.other.chemmac"
+					},
+					{"include": "#keywords"},
+					{"include": "#staticRules"},
+					{"include": "#variables"}
+				]
+			},
+			{
+				"begin": "^[\\s]*(?i:(dynamic))\\s",
+				"beginCaptures": {
+					"1": {
+						"name": "support.function.chemmac"
+					}
+				},
+				"end": "$",
+				"patterns": [
+					{
+						"match": "(?<=(?i:dynamic)\\s)[\\s]*(?i:(XR?A?Y?)|(ENTLE?N?S?O?F?F?S?E?T?)|(ENTRA?N?C?E?_?L?E?N?S?)|(IO?N?F?O?C?U?S?)|(RE?P?E?L?L?E?R?))\\b",
+						"name": "keyword.other.chemmac"
+					},
+					{
+						"match": "\\b(?i:clear|list|disable|enable|set|append|read|plot)\\b",
+						"name": "keyword.other.chemmac"
+					},
+					{"include": "#keywords"},
+					{"include": "#staticRules"},
+					{"include": "#variables"}
+				]
+			},
+			{
+				"begin": "^[\\s]*(?i:(loadmode))\\s",
+				"beginCaptures": {
+					"1": {
+						"name": "support.function.chemmac"
+					}
+				},
+				"end": "$",
+				"patterns": [
+					{
+						"match": "\\b(?i:t|s)\\b",
+						"name": "keyword.other.chemmac"
+					},
+					{"include": "#keywords"},
+					{"include": "#staticRules"},
+					{"include": "#variables"}
+				]
+			},
+			{
+				"begin": "^[\\s]*(?i:(mstemp))\\s",
+				"beginCaptures": {
+					"1": {
+						"name": "support.function.chemmac"
+					}
+				},
+				"end": "$",
+				"patterns": [
+					{
+						"match": "\\b(?i:source|quad)\\b",
+						"name": "keyword.other.chemmac"
+					},
+					{"include": "#keywords"},
+					{"include": "#staticRules"},
+					{"include": "#variables"}
+				]
+			},
+			{
+				"begin": "^[\\s]*(?i:(profparm))\\s",
+				"beginCaptures": {
+					"1": {
+						"name": "support.function.chemmac"
+					}
+				},
+				"end": "$",
+				"patterns": [
+					{
+						"match": "\\b(?i:pw|showabund)\\b",
+						"name": "keyword.other.chemmac"
+					},
+					{"include": "#keywords"},
+					{"include": "#staticRules"},
+					{"include": "#variables"}
+				]
+			},
+			{
+				"begin": "^[\\s]*(?i:(setthresh))\\s",
+				"beginCaptures": {
+					"1": {
+						"name": "support.function.chemmac"
+					}
+				},
+				"end": "$",
+				"patterns": [
+					{
+						"match": "\\b(?i:width|thresh|reset)\\b",
+						"name": "keyword.other.chemmac"
+					},
+					{"include": "#keywords"},
+					{"include": "#staticRules"},
+					{"include": "#variables"}
+				]
+			},
+			{
+				"begin": "^[\\s]*(?i:(msparm(info)?))\\s",
+				"beginCaptures": {
+					"1": {
+						"name": "support.function.chemmac"
+					}
+				},
+				"end": "$",
+				"patterns": [
+					{
+						"match": "(?<=(?i:msparm|msparminfo)\\s)[\\s]*(?i:(amuga?i?n?)|(amuof?f?s?e?t?)|(dc?p?o?l?a?r?i?t?y?)|(emis?s?i?o?n?)|(emvo?l?t?s?)|(ele?c?t?r?o?n?)|(ENTLE?N?S?O?F?F?S?E?T?)|(ENTRA?N?C?E?_?L?E?N?S?)|(FI?L?A?M?E?N?T?)|(IO?N?F?O?C?U?S?)|(RE?P?E?L?L?E?R?)|(WI?D?T?H?2?1?9?))\\b",
+						"name": "keyword.other.chemmac"
+					},
+					{"include": "#keywords"},
+					{"include": "#staticRules"},
+					{"include": "#variables"}
+				]
+			},
+			{
+				"begin": "^[\\s]*(?i:(setramp|simramp))\\s",
+				"beginCaptures": {
+					"1": {
+						"name": "support.function.chemmac"
+					}
+				},
+				"end": "$",
+				"patterns": [
+					{
+						"match": "(?<=(?i:setramp|simramp)\\s)[\\s]*(?i:(amuga?i?n?)|(amuof?f?s?e?t?)|(ENTLE?N?S?O?F?F?S?E?T?)|(ENTRA?N?C?E?_?L?E?N?S?)|(IO?N?F?O?C?U?S?)|(RE?P?E?L?L?E?R?))\\b",
+						"name": "keyword.other.chemmac"
+					},
+					{"include": "#keywords"},
+					{"include": "#staticRules"},
+					{"include": "#variables"}
+				]
+			},
+			{
+				"begin": "^[\\s]*(?i:(scanparm))\\s",
+				"beginCaptures": {
+					"1": {
+						"name": "support.function.chemmac"
+					}
+				},
+				"end": "$",
+				"patterns": [
+					{
+						"match": "\\b(?i:lowmass|himass|threshold|scantype)\\b",
+						"name": "keyword.other.chemmac"
+					},
+					{"include": "#keywords"},
+					{"include": "#staticRules"},
+					{"include": "#variables"}
+				]
+			},
+			{
+				"begin": "^[\\s]*(?i:(topbox[12]))\\s",
+				"beginCaptures": {
+					"1": {
+						"name": "support.function.chemmac"
+					}
+				},
+				"end": "$",
+				"patterns": [
+					{
+						"match": "\\b(?i:white|yellow|green|red)\\b",
+						"name": "keyword.other.chemmac"
+					},
+					{"include": "#keywords"},
+					{"include": "#staticRules"},
+					{"include": "#variables"}
+				]
+			},
+			{
+				"begin": "^[\\s]*(?i:(vacuum))\\s",
+				"beginCaptures": {
+					"1": {
+						"name": "support.function.chemmac"
+					}
+				},
+				"end": "$",
+				"patterns": [
+					{
+						"match": "\\b(?i:status|vent|pumpdown)\\b",
+						"name": "keyword.other.chemmac"
+					},
+					{"include": "#keywords"},
+					{"include": "#staticRules"},
+					{"include": "#variables"}
+				]
+			}
+			]
+		},
+		"commandsDACommon": {
+			"patterns": [
+				{
+					"begin": "^[\\s]*(?i:(_get))\\s",
+					"beginCaptures": {
+						"1": {
+							"name": "support.function.chemmac"
+						}
+					},
+					"end": "$",
+					"patterns": [
+						{
+							"match": "\\b(?i:information|index|point|results)\\b",
+							"name": "keyword.other.chemmac"
+						},
+						{"include": "#keywords"},
+						{"include": "#staticRules"},
+						{"include": "#variables"}
+					]
+				},
+				{
+					"begin": "^[\\s]*(?i:(_tab))\\s",
+					"beginCaptures": {
+						"1": {
+							"name": "support.function.chemmac"
+						}
+					},
+					"end": "$",
+					"patterns": [
+						{
+							"match": "\\b(?i:results|percent)\\b",
+							"name": "keyword.other.chemmac"
+						},
+						{"include": "#keywords"},
+						{"include": "#staticRules"},
+						{"include": "#variables"}
+					]
+				},
+				{
+					"begin": "^[\\s]*(?i:(annotate))\\s",
+					"beginCaptures": {
+						"1": {
+							"name": "support.function.chemmac"
+						}
+					},
+					"end": "$",
+					"patterns": [
+						{
+							"match": "\\b(?i:norefresh)\\b",
+							"name": "keyword.other.chemmac"
+						},
+						{"include": "#keywords"},
+						{"include": "#staticRules"},
+						{"include": "#variables"}
+					]
+				},
+				{
+					"begin": "^[\\s]*(?i:(baseline))\\s",
+					"beginCaptures": {
+						"1": {
+							"name": "support.function.chemmac"
+						}
+					},
+					"end": "$",
+					"patterns": [
+						{
+							"match": "\\b(?i:now|nextvalley|back|allvalley|hold)\\b",
+							"name": "keyword.other.chemmac"
+						},
+						{"include": "#keywords"},
+						{"include": "#staticRules"},
+						{"include": "#variables"}
+					]
+				},
+				{
+					"begin": "^[\\s]*(?i:(bsb|copy|delete|rename))\\s",
+					"beginCaptures": {
+						"1": {
+							"name": "support.function.chemmac"
+						}
+					},
+					"end": "$",
+					"patterns": [
+						{
+							"match": "\\b(?i:dontask)\\b",
+							"name": "keyword.other.chemmac"
+						},
+						{"include": "#keywords"},
+						{"include": "#staticRules"},
+						{"include": "#variables"}
+					]
+				},
+				{
+					"begin": "^[\\s]*(?i:(clear))\\s",
+					"beginCaptures": {
+						"1": {
+							"name": "support.function.chemmac"
+						}
+					},
+					"end": "$",
+					"patterns": [
+						{
+							"match": "\\b(?i:intresults|libresults)\\b",
+							"name": "keyword.other.chemmac"
+						},
+						{"include": "#keywords"},
+						{"include": "#staticRules"},
+						{"include": "#variables"}
+					]
+				},
+				{
+					"begin": "^[\\s]*(?i:(format))\\s",
+					"beginCaptures": {
+						"1": {
+							"name": "support.function.chemmac"
+						}
+					},
+					"end": "$",
+					"patterns": [
+						{
+							"match": "\\b(?i:merged|separated|(no)?labelpeaks|(no)?timepeaks)\\b",
+							"name": "keyword.other.chemmac"
+						},
+						{"include": "#keywords"},
+						{"include": "#staticRules"},
+						{"include": "#variables"}
+					]
+				},
+				{
+					"begin": "^[\\s]*(?i:(getcompound))\\s",
+					"beginCaptures": {
+						"1": {
+							"name": "support.function.chemmac"
+						}
+					},
+					"end": "$",
+					"patterns": [
+						{
+							"match": "\\b(?i:timeref|istd|select|full)\\b",
+							"name": "keyword.other.chemmac"
+						},
+						{"include": "#keywords"},
+						{"include": "#staticRules"},
+						{"include": "#variables"}
+					]
+				},
+				{
+					"begin": "^[\\s]*(?i:(getmsref))\\s",
+					"beginCaptures": {
+						"1": {
+							"name": "support.function.chemmac"
+						}
+					},
+					"end": "$",
+					"patterns": [
+						{
+							"match": "\\b(?i:condms|fullms)\\b",
+							"name": "keyword.other.chemmac"
+						},
+						{"include": "#keywords"},
+						{"include": "#staticRules"},
+						{"include": "#variables"}
+					]
+				},
+				{
+					"begin": "^[\\s]*(?i:(getresult))\\s",
+					"beginCaptures": {
+						"1": {
+							"name": "support.function.chemmac"
+						}
+					},
+					"end": "$",
+					"patterns": [
+						{
+							"match": "\\b(?i:full)\\b",
+							"name": "keyword.other.chemmac"
+						},
+						{"include": "#keywords"},
+						{"include": "#staticRules"},
+						{"include": "#variables"}
+					]
+				},
+				{
+					"begin": "^[\\s]*(?i:(getscalars))\\s",
+					"beginCaptures": {
+						"1": {
+							"name": "support.function.chemmac"
+						}
+					},
+					"end": "$",
+					"patterns": [
+						{
+							"match": "\\b(?i:info|index|point|results)\\b",
+							"name": "keyword.other.chemmac"
+						},
+						{"include": "#keywords"},
+						{"include": "#staticRules"},
+						{"include": "#variables"}
+					]
+				},
+				{
+					"begin": "^[\\s]*(?i:(peaknumber|peakvars))\\s",
+					"beginCaptures": {
+						"1": {
+							"name": "support.function.chemmac"
+						}
+					},
+					"end": "$",
+					"patterns": [
+						{
+							"match": "\\b(?i:start|top|end)\\b",
+							"name": "keyword.other.chemmac"
+						},
+						{"include": "#keywords"},
+						{"include": "#staticRules"},
+						{"include": "#variables"}
+					]
+				},
+				{
+					"begin": "^[\\s]*(?i:(putcompound))\\s",
+					"beginCaptures": {
+						"1": {
+							"name": "support.function.chemmac"
+						}
+					},
+					"end": "$",
+					"patterns": [
+						{
+							"match": "\\b(?i:insert)\\b",
+							"name": "keyword.other.chemmac"
+						},
+						{"include": "#keywords"},
+						{"include": "#staticRules"},
+						{"include": "#variables"}
+					]
+				},
+				{
+					"begin": "^[\\s]*(?i:(setwin(dow)?attribute))\\s",
+					"beginCaptures": {
+						"1": {
+							"name": "support.function.chemmac"
+						}
+					},
+					"end": "$",
+					"patterns": [
+						{
+							"match": "\\b(?i:cursorshape|mousemacro|markershape|snaptoactual|rightdragshape|showtitles|leftdragshape|coloroffset|usercode|resetall)\\b",
+							"name": "keyword.other.chemmac"
+						},
+						{"include": "#keywords"},
+						{"include": "#staticRules"},
+						{"include": "#variables"}
+					]
+				},
+				{
+					"begin": "^[\\s]*(?i:(subtract))\\s",
+					"beginCaptures": {
+						"1": {
+							"name": "support.function.chemmac"
+						}
+					},
+					"end": "$",
+					"patterns": [
+						{
+							"match": "\\b(?i:suppress)\\b",
+							"name": "keyword.other.chemmac"
+						},
+						{"include": "#keywords"},
+						{"include": "#staticRules"},
+						{"include": "#variables"}
+					]
+				},
+				{
+					"begin": "^[\\s]*(?i:(tabulate))\\s",
+					"beginCaptures": {
+						"1": {
+							"name": "support.function.chemmac"
+						}
+					},
+					"end": "$",
+					"patterns": [
+						{
+							"match": "\\b(?i:results|header|events|percent)\\b",
+							"name": "keyword.other.chemmac"
+						},
+						{"include": "#keywords"},
+						{"include": "#staticRules"},
+						{"include": "#variables"}
+					]
+				},
+				{
+					"begin": "^[\\s]*(?i:(transform))\\s",
+					"beginCaptures": {
+						"1": {
+							"name": "support.function.chemmac"
+						}
+					},
+					"end": "$",
+					"patterns": [
+						{
+							"match": "\\b(?i:[xy]axis)\\b",
+							"name": "keyword.other.chemmac"
+						},
+						{"include": "#keywords"},
+						{"include": "#staticRules"},
+						{"include": "#variables"}
+					]
+				},
+				{
+					"begin": "^[\\s]*(?i:([s]?print))\\s",
+					"beginCaptures": {
+						"1": {
+							"name": "support.function.chemmac"
+						}
+					},
+					"end": "$",
+					"patterns": [
+						{
+							"match": "\\b(?i:(using))\\s",
+							"name": "support.function.chemmac"
+						},
+						{"include": "#keywords"},
+						{"include": "#staticRules"},
+						{"include": "#variables"}
+					]
+				}
+			]
+		},
+		"commandList": {
+			"patterns": [
+				{
+					"match": "^[\\s]*(?i:ABS|ALERT|ARRAYSTAT|ASC|BIT_AND|BYE|CEIL|CHECK|CHR\\$|CLOSE|CMDLINE|COLS|COMMANDS|COPY|CPBYE|CPPURGE|CPSHOWWIN|CPTAG|CPTITLE|CPTITLE\\$|CPTOOL|DATE\\$|DDEADVISE|DDEEXECUTE|DDEINITIATE|DDEPOKE|DDEREQUEST|DDETERMINATE|DELETE|DIM|DLLINSTALL|DLLREMOVE|DOSRUN|ECHO|ECHOMODE|ELSE|ENDIF|EOF|EQSTR|EVALUATE|EXEC|EXP|FILEATTRIBUTES\\$|FILESIZE|FILESTAT|FINDFIRSTFILE|FINDNEXTFILE|FLOOR|FREESPACE|GENERATE_ERROR|GETCWD\\$|GETINFO|GETINIINT|GETINISTRING\\$|GETPROPERTY|GETWINDOWID|GETWINLOC|HELP|IF|INISTRFORINT\\$|INPUT|INPUT|INPUT6|INSERT|INSTR|JOIN|LEN|LN|LOCAL|LOG|LOGGING|LOWER\\$|MACRO|MDIARRANGE|MDICASCADE|MDITILE|MENUBEG|MENUCHG|MENUCMD|MENUCMDFN|MENUEND|MENUHLP|MENUNEW|MENUSEP|MENUSHW|MENUSTP|MENUVAR|MKDIR|MOD|MTIME|NAME|NUM|ON_ERROR|OPEN|PARAMETER|PRINT|PRINTTEXTFILE|PROTECTMACRO|PULLOUT|REMOVE|REMOVELIST|RENAME|RETURN|RMDIR|ROUND|ROWS|RUNCLASS|SELECTFILE|SDIM|SETINFO|SETINISTRING|SLEEP|SPRINT|SQR|SQRT|STRCMP|TIME|TIME\\$|TOPCMD|TOPDOT|TRUNC|UNPROTECTMACRO|UPPER\\$|VAL|VAL\\$|VARLOCK|VERSION|VERSION\\$|WHILE|WINMOVE|WINSIZE)\\s",
+					"name": "support.function.chemmac"
+				},
+				{
+					"match": "^[\\s]*(?i:CREATEWINDOW|CSADDSTRUCT|CSATTACH|CSCOPY|CSCOPY|CSCOPY|CSCOPY|CSCREATE|CSCREATE|CSDRAWOPTS|CSEXISTS|CSEXISTS|CSLIBS|CSMFATTACH|CSMFATTACH|CSMFCREATE|CSMOLCREATE|CSSUBSET|GETWINDOWTEXT\\$|SETWINDOWLOC|SETWINDOWLOC|SETWINDOWTEXT|SHOWWINDOW)\\s",
+					"name": "support.function.chemmac"
+				},
+				{
+					"match": "^[\\s]*(?i:ABORT|ADDPEAKS|ALLCONT|ANNOTATE|AREAREJECT|AREASUM|AUTOINT|AVERAGE|BASELINE|BASELINE|BSB|CALEXCEL|CALIBPRINT|CALRPT|CCCHK|CCRPT|CHROMATOGR|CLEAR|CLEAR|CLEARCPNDS|CLIP|CLREVENTS|CMI|COMPOUND|CPDANALYZE|CREATEWINDOW|CSADDSTRUCT|CSATTACH|CSCHRO|CSCOPY|CSCOPY|CSCOPY|CSCOPY|CSCREATE|CSCREATE|CSDRAWOPTS|CSEXISTS|CSEXISTS|CSLIBS|CSMFATTACH|CSMFATTACH|CSMFCREATE|CSMOLCREATE|CSSUBSET|DLGQDBSETUP|DOLIST|DOSCAN|DRAW|EASYID|EDITCPNDS|EDITEVENTS|EDITGCVALCC|EDITGCVALEPA|EDITGCVALLSC|EDITGCVALTUNE|EDITHEADER|EDITMETHFILE|EDITSTRATEGY|EDITVALCC|EDITVALEPA|EDITVALLCS|EDITVALTUNE|EIC|ENDJOB|ENDLOG|ENDPRINT|ENDSET|ENDWHILE|EXCHANGE|EXIT|EXPORTRSLT|FILEcd13|FILEPRINT|FILTER|FINDBYCAS|FORMAT|GET|GETCOMPOUND|GETMSREF|GETRESULT|GETSCALARS|GETSCALARS|GETSCALARS|GETSCALARS|GETWINDOWTEXT\\$|GRAPHICS|GRP|HGFILE|INITREJECT|INITTHRESH|INITWIDTH|INTEGRATE|INTEGRATOR|INVERSEB|INVERSEM|LABEL|LIBRESULTS|LIST|LOADMETHPANEL|LOADQUANTMETH|MAKEBAR|MAKECONT|MENUSTATE|MENUSTP|MI|MSCLIP|MSTRUNC|MULTITHUMB|MW|NEGPEAKS|_NML|NORMALIZE|ORIGINAL|PAGESIZE|PBMSEARCH|PCTRPTOPT|PEAKNUMBER|PEAKVARS|PEAKVARS|PEAKWIDTH|PICSIX|POINTS|PRCLOSERESULTS|PRGETRETRESULTS|PRPARAMS|PRRESULTS|PRRETRIEVE|PRSAVEPARAMS|PRSETPARAMS|PRSETWINPOSITION|PUTCOMPOUND|QCAL|QCALCC|QDEL|QEDIT|QLIST|QREF|QT|QUALPARMS|QUALRPTOPT|QUANTPARMS|QUANTRPTOPT|QUANTSAVE|QUEUE|RECALIB|RECALL|REFRESH|REPORT_TIC|ROLL|RRCAL|RRCAL|RTEINT|RTEINTPARMS|SAVEEVENTS|SAVEMETHPANEL|SAVEMISC|SAVESTRATEGY|SCAN|SELECTFILTER|SETUPCALIB|SETWINATTRIBUTE|SETWINDOWLOC|SETWINDOWLOC|SETWINDOWTEXT|SHOULDERS|SHOWWINDOW|SLOG|SMOOTH|SMOOTHCHR|SOLVENTS|SPECTRUM|SPIKE|STACK|STARTANALYSIS|STARTJOB|STARTPRINT|STARTREPORT|STARTSET|STORE|STRPRINT|SUBTRACT|SUBZERO|TABULATE|_TAB|_TABH|TANSKIM|THRESHOLD|TIC|TOOL|TRANSFORM|TRFILE|TUNECHECK|UPDATECALIB|UPDATERSLT|VIEWCALCURVE|VIEWPBMTEXT|WINDOW|WINEXIST|WINPOSITION|WINPRINT|WINVARNAME\\$|_XFM|XPAND|ZOOM|ZOOMOUT)\\s",
+					"name": "support.function.chemmac"
+				},
+				{
+					"match": "^[\\s]*(?i:CMDLINE|CPTITLE|ECHO|ECHOMODE|GETWINLOC|PRINT|SPRINT|WINMOVE|WINSIZE|MENUBEG|MENUCMD|MENUCMDFN|MENUEND|MENUHLP|MENUNEW|MENUSEP|MENUSTP|MENUVAR|CLOSE|COPY|DELETE|FILEATTRIBUTES\\$|FINDFIRSTFILE|FINDNEXTFILE|FILESIZE|FILESTAT|FREESPACE|GETCWD\\$|INPUT|MKDIR|OPEN|PRINT|RENAME|RMDIR|SELECTFILE|ARRAYSTAT|COLS|DIM|INSERT|JOIN|NUM|PULLOUT|ROWS|ABS|BIT_AND|CEIL|EXP|FLOOR|LN|LOG|MOD|ROUND|SQR|SQRT|TRUNC|VAL\\$|EQSTR|INSTR|LEN|LOWER\\$|UPPER\\$|VAL|DDEADVISE|DDEEXECUTE|DDEINITIATE|DDEPOKE|DDEREQUEST|DDETERMINATE|DATE\\$|DOSRUN|EXEC|GETINI|GETINIINT|GETWINDOWID|INIFORINT\\$|MTIME|PRINTTEXTFILE|SETINI|SLEEP|TIME|TIME\\$|CHECK|COMMANDS|DLLINSTALL|GETINFO|HELP|LOGGING|RUNCLASS|TOPCMD|TOPDOT|VARLOCK|VERSION|BYE|ALERT|INPUT|INPUT6|LOADMETHPANEL|SAVEMETHPANEL)\\s",
+					"name": "support.function.chemmac"
+				},
+				{
+					"match": "^[\\s]*(?i:AVERAGE|CHROMATOGR|EIC|FILE|SCAN|SPECTRUM|TIC|RAWSCAN|RAWSUM|_TAB|ALLCONT|ANNOTATE|CLEAR|CLIP|DRAW|FORMAT|MAKEBAR|MAKECONT|MENUSTATE|OUTPUTSCAN|REFRESH|SETWINATTRIBUTE|STACK|TABULATE|WINDOW|WINEXIST|WINPOSITION|ZOOM|ZOOMOUT|_GET|_NML|_XFM|BSB|CLEAR|GETSCALARS|MSCLIP|MSTRUNC|NORMALIZE|PEAKNUMBER|PEAKVARS|POINTS|RECALL|SAVEMISC|STORE|SUBTRACT|SUBZERO|TRANSFORM|AUTOINT|AREAREJECT|AREASUM|BASELINE|CLREVENTS|EDITEVENTS|INITREJECT|INITTHRESH|INITWIDTH|INTEGRATE|INTEGRATOR|NEGPEAKS|PEAKWIDTH|SAVEEVENTS|SHOULDERS|SOLVENTS|TANSKIM|THRESHOLD)\\s",
+					"name": "support.function.chemmac"
+				},
+				{
+					"match": "^[\\s]*(?i:MI|RTEINT|RTEINTPARMS|ENDJOB|ENDPRINT|FILEPRINT|PAGESIZE|STARTJOB|STARTPRINT|STRPRINT|WINPRINT|EDITHEADER|EDITSTRATEGY|FINDBYCAS|GETMSREF|MW|PBMSEARCH|QUALPARMS|QUALRPTOPT|SAVESTRATEGY|VIEWPBMTEXT|ADDPEAKS|CALIBPRINT|CLEARCPNDS|CPDANALYZE|DELLEVEL|DLGQDBSETUP|EDITCPNDS|ENDSET|EXPORTRSLT|GETCOMPOUND|GETRESULT|LOADQUANTMETH|PCTRPTOPT|PUTCOMPOUND|QUANTPARMS|QUANTRPTOPT|RECALIB|SETUPCALIB|STARTANALYSIS|STARTREPORT|STARTSET|UPDATECALIB|UPDATERSLT|VIEWCALCURVE)\\s",
+					"name": "support.function.chemmac."
+				},
+				{
+					"match": "^[\\s]*(?i:EDZONE|FIRMWARE7673\\$|GCMETHODEDIT|GCMETHODEDIT\\$|GCMETHODLOAD|GCMETHODNAME|GCMETHODNUM|GCMETHODPRINT|GCMETHODSAVE|GCPLOTEDIT|GCPLOTOFF|GCPLOTON|GCSHOWDEVICEWIN|GCVIEWPARAMS|ICARRANGEPLOTS|ICCREATEBAR|ICCREATEHP|ICDESTROYGADGET|ICDUMPERROR|ICMAKEDIR|ICSAMPLEINFO|ICSHOW|INJECTORS7673|INSTRVIEW|LBADDENTRY|LBCLEAR|LBCREATEBM|LBDISPLAY|LBPRINT|LBSAVEAS|MSMETHODEDIT|MSMETHODLOAD|MSMETHODPRINT|MSMETHODSAVE|MSQUERYTUNE|MSRECOVER|MSRTCHANGE|MSSENDVALVES|MSSHOWDEVICEWIN|MSTEMP|MSVIEWPARAMS|MS_SEND_VALVES|NOTRAY7673|PICKTUNEFILE|READBARCODE\\$|RCMETHODEDIT|RCMETHODLOAD|RCMETHODPRINT|RCMETHODSAVE|RUNABORT|RUNERROR|RUNSTART|SCCLEAR|SCERROR|SCPOLL|SCQUERY|SCTRACE|SCWRITE|SCWRITERD|SENDMODULE\\$|SETCIACTIVE|TEMPEQUIL|USETRAY7673|WRITEMODULE)\\s",
+					"name": "support.function.chemmac"
+				},
+				{
+					"match": "^[\\s]*(?i:AREAREJECT|AREASUM|BASELINE|BASELINE|INITREJECT|INITTHRESH|INITWIDTH|INTEGRATOR|NEGPEAKS|PEAKWIDTH|SHOULDERS|SOLVENTS|TANSKIM|THRESHOLD|TABULATE|DATANALYSIS|EDITMETHPANEL|LOADMETHPANEL|LOADMODE|LOADSEQUENCE|METHINFOPANEL|MSINSCTL|POP|PROMPTMODE|RUNMODE|SAMPLELOGTABLE|SAVEMETHPANEL|SAVESEQUENCE|SAVETOPMETHOD|SETDATAFILE|STARTRUNPANEL|STARTSEQPANEL|STATUSPANEL|SYNCHRONIZE|TOPBOX1|TOPBOX2)\\s",
+					"name": "support.function.chemmac"
+				},
+				{
+					"match": "^[\\s]*(?i:ABUNDANCE|AVERAGES|AXIS|BUFSIZE|CAL_VALVE|CALVALVE|CAPTURE|DISPPRINT|DYNAMIC|EDDISP|EDITFILEINFO|EDPARMS|EDRAMP|EDZONE|ENDJOB|FILTERM|FINDBIT|FINDMASS|FRESHTUNE|GCLEAR|GDISPLAY|GETCONFIG|GETMSFAULT|IOTEST|INSTRPARM|LOGDATA|LSTSQFIT|MASS|MASSES|MASSFACTOR|MASSGAIN|MASSOFFSET|MASSWINDOW|MATTOFILE|MAXSCANRNG|MENUSTATE|MSBUILD|MSCHECK|MSCLOSE|MSCREATE|MSOFF|MSON|MSOPEN|MSPARM|MSPARMINFO|MSPRINT|MSSNAP|MSTATUS|MSTEMP|MSWRITE|OPTIM|PAGESIZE|PEAKPARM|PICKTUNEFILE|PROFILE|PROFPARM|PWIDTHS|RAMPSMOOTH|SAMPLES|SAVECONFIG|SC|SCALEMODE|SCAN|SCANPARM|SCANPRINT|SCINIT|SCIOINIT|SETCIACTIVE|SETRAMP|SETRFPA|SETTHRESH|SETUSER|SIMACQ|SIMRAMP|STARTJOB|STEPSIZE|STRPRINT|TEMPEQUIL|THRESHOLD|TRACE|VACUUM|WAIT|WIDTHS|WINDDISP|XFER|XFR)\\s",
+					"name": "support.function.chemmac"
+				},
+				{
+					"match": "^[\\s]*(?i:BATCHSTATUS|CIVALVE|DATANALYSIS|EDCI|EDDYN|EDITMETHPANEL|EDZONE|FLOWRATE|FOREGROUND|ICARRANGEPLOTS|ICCREATEBAR|ICCREATEHP|ICDeleteBM|ICDESTROYGADGET|ICDUMPERROR|ICMAKEDIR|ICSAMPLEINFO|ICSHOW|INSTRVIEW|IPREGISTER|LBADDENTRY|LBCLEAR|LBClose|LBCmd1|LBCmd2|LBCREATEBM|LBDeleteBM|LBDISPLAY|LBPRINT|LBSAVEAS|LBSHOW|LMCPEXECUTE|LMDATANALYSIS|LOADMETHPANEL|LOADMODE|LOADSEQUENCE|MENUEXEC|MENUMDI|METHINFOPANEL|MSDeleteDeviceW|MSMETHODEDIT|MSMETHODPRINT|MSMETHODSAVE|MSQUERYTUNE|MSRECOVER|MSSENDVALVES|MSSHOWDEVICEWIN|MSTEMP|MSVIEWPARAMS|PICKTUNEFILE|PUSH|QUERYLUI|RCMETHODEDIT|RCMETHODLOAD|RCMETHODPRINT|RCMETHODSAVE|RUNABORT|RUNERROR|RUNMODE|RUNSTART|SAVEMETHPANEL|SAVESEQUENCE|SAVETOPMETHOD|SCCLEAR|SCERROR|SCPOLL|SCQUERY|SCTRACE|SCWRITE|SCWRITERD|SETCIACTIVE|SENDMODULE$|SETDATAFILE|SIMGRPTBL|SETPGAUGE|SLTCONFIG|SSSLT|STARTRUNPANEL|STARTSEQPANEL|STATUSPANEL|STRDIM|TEMPEQUIL|TOPBOX1|TOPBOX2|WRITEMODULE|XDATANALYSIS)\\s",
+					"name": "support.function.chemmac"
+				},
+				{
+					"match": "^[\\s]*(?i:ABUNDANCE|AVERAGES|AXIS|BATCHSTATUS|BUFSIZE|CAL_VALVE|CALVALVE|CAPTURE|CIVALVE|DISPPRINT|DYNAMIC|EDCI|EDDISP|EDDYN|EDITFILEINFO|EDPARMS|EDRAMP|EDZONE|FILTERM|FINDBIT|FINDMASS|FLOWRATE|FOREGROUND|FRESHTUNE|GCLEAR|GCMoveAnyWin|GCScreenRes|GCSetFocus|GDISPLAY|GETCONFIG|GETMSFAULT|GETPRESSURE|GETREGVALUE|HTTPD|ICDeleteBM|IOTEST|INSTRPARM|IPREGISTER|LBCLOSE|LBCmd1|LBCmd2|LBDeleteBM|LBShow|LMCPEXECUTE|LMDATANALYSIS|LOGDATA|LSTSQFIT|MASS|MASSES|MASSFACTOR|MASSGAIN|MASSOFFSET|MASSWINDOW|MATTOFILE|MAXSCANRNG|MENUEXEC|MENUMDI|MENUSTATE|MSBUILD|MSCHECK|MSCLOSE|MSCREATE|MSOFF|MSON|MSOPEN|MSPARM|MSPARMINFO|MSSNAP|MSTATUS|MSTEMP|MSWRITE|OPTIM|PAGESIZE|PEAKPARM|PICKTUNEFILE|PROFILE|PROFPARM|PUSH|PWIDTHS|RAMPSMOOTH|QUERYLUI|SAMPLES|SAVECONFIG|SC|SCALEMODE|SCAN|SCANPARM|SCANPRINT|SCINIT|SCIOINIT|SETCIACTIVE|SETPGAUGE|SETRAMP|SETRFPA|SETTHRESH|SETUSER|SIMACQ|SIMRAMP|SLTCONFIG|SSSLT|STARTJOB|STEPSIZE|STRDIM|STRPRINT|TEMPEQUIL|THRESHOLD|TRACE|VACUUM|WAIT|WIDTHS|WINDDISP|XDATANALYSIS)\\s",
+					"name": "support.function.chemmac"
+				},
+				{
+					"match": "^[\\s]*(?i:ADDPEAKS|ALLCONT|ANNOTATE|AREAREJECT|AREASUM|AUTOINT|AVERAGE|BASELINE|BASELINE|BSB|CALIBPRINT|CDFFILE|CHROMATOGR|CLEAR|CLEAR|CLEARCPNDS|CLIP|ClipCvt|CLREVENTS|CMI|CPDANALYZE|CSADDSTRUCT|CSATTACH|CSCHRO|CSDRAWOPTS|CSEXISTS|CSEXISTS|CSLIBS|CSMFATTACH|CSMFATTACH|CSMOLCREATE|CSSetMode|CSSUBSET|DATACOORDS|DELETEINTPEAK|DLGQDBSETUP|DRAW|EDITCPNDS|EDITEVENTS|EDITHEADER|EDITMETHFILE|EDIT_CC_VALS|EDIT_EPA_VALS|EDIT_LSC_VALS|EDIT_TUNE_VALS|EDITGC_CC_VALS|EDITGC_EPA_VALS|EDITSTRATEGY|EIC|ENDJOB|ENDPDF|ENDPRINT|ENDSET|ENDWHILE|EXCHANGE|EXPORTRSLT|FILEPRINT|FILTER|FINDBYCAS|FLTR|FOREGROUND|FORMAT|GC6890FILE|GCCDFFILE|GCFILE|GCXLATE|GETCOMPOUND|GETMSREF|GETPRINTERINFO|GETPRINTERLIST|GETREGVALUE|GETRESULT|GETSCALARS|GETWINDOWTEXT\\$|HGFILE|HGXLATE|INITREJECT|INITTHRESH|INITWIDTH|INSERTINTPEAK|INTEGRATE|INTEGRATOR|INVERTFILE|LIBRESULTS|LOADMETHPANEL|LOADQUANTMETH|LSCVIEW|MAKEBAR|MAKECONT|MENUEXEC|MENUSTP|MENUUPDATE|MI|MSCLIP|MSTRUNC|MULTIVU|MULTISLCT|MW|NEGPEAKS|NORMALIZE|OVLAYSET|PAGESIZE|PBMSEARCH|PCTRPTOPT|PEAKFIND|PEAKNUMBER|PEAKVARS|PEAKVARS|PEAKWIDTH|PKDT|POINTS|PUTCOMPOUND|PUTPROPERTY|QRXTEND|QSELECT|QT|QUALPARMS|QUALRPTOPT|QUANTPARMS|QUANTRPTOPT|QUANTSAVE|QUICKQ|RECALIB|RECALL|REFRESH|ROLL|RPTOPT|RTEINT|RTEINTPARMS|SAVEEVENTS|SAVEMETHPANEL|SAVEMISC|SAVESTRATEGY|SCAN|SELECTDATAFILE|SELECTFILTER|SELECTMETHOD|SETMSDREGVALUE|SETPLOTCOLORS|SETPRINTER|SETREGVALUE|SETUPCALIB|SETWINATTRIBUTE|SETWINDOWLOC|SETWINDOWLOC|SETWINDOWTEXT|SHOULDERS|SHOWWINDOW|SIMGRPTBL|SOLVENTS|SPECTRUM|SSSLT|STACK|STARTANALYSIS|STARTJOB|STARTPDF|STARTPRINT|STARTREPORT|STARTSET|STORE|STRDIM|STRPRINT|SUBTRACT|SYMBOLDUMP|SYSEVENTLOG|TABULATE|TANSKIM|THRESHOLD|TIC|TRANSFORM|TREECONTROL|TREEFOCUS|UPDATECALIB|UPDATERSLT|VIEWCALCURVE|VIEWPBMTEXT|WINDOW|WINPOSITION|WINPRINT|ZOOM|ZOOMOUT)\\s",
+					"name": "support.function.chemmac"
+				},
+				{
+					"match": "^[\\s]*(?i:ABS|ALERT|ARRAYSTAT|ASC|BAKE|BIT_AND|BYE|BYTELEN|CEIL|CHECK|CHR\\$|CLOSE|CMDLINE|COLS|COMMANDS|COPY|CPBYE|CPSHOWWIN|CPTITLE|CPTITLE\\$|CPTOOL|DATE\\$|DDEADVISE|DDEEXECUTE|DDEINITIATE|DDEPOKE|DDEREQUEST|DDETERMINATE|DELETE|DIM|DLLINSTALL|DLLREMOVE|DOSRUN|ECHO|ECHOMODE|ELSE|ENDIF|EOF|EQSTR|EVALUATE|EXEC|EXP|FILEATTRIBUTES\\$|FILESIZE|FILESTAT|FINDFIRSTFILE|FINDNEXTFILE|FLOOR|FREESPACE|GENERATE_ERROR|GETCWD\\$|GETINFO|GETINIINT|GETINISTRING\\$|GETPROPERTY|GETWINDOWID|GETWINLOC|HELP|IF|INISTRFORINT\\$|INPUT|INPUT|INPUT6|INSERT|INSTR|JOIN|LEN|LN|LOCAL|LOG|LOGGING|LOWER\\$|MACRO|MDIARRANGE|MDICASCADE|MDITILE|MENUBEG|MENUCHG|MENUCMD|MENUCMDFN|MENUEND|MENUHLP|MENUNEW|MENUSEP|MENUSHW|MENUSTP|MENUVAR|MKDIR|MOD|MTIME|NUM|ON_ERROR|OPEN|PRINT|PRINT|PRINT|PRINT|PRINTTEXTFILE|PROTECTMACRO|PULLOUT|REMOVE|REMOVELIST|RENAME|RETURN|RMDIR|ROUND|ROWS|RUNCLASS|SELECTFILE|SDIM|SETINISTRING|SLEEP|SPRINT|SQR|SQRT|STRCMP|TIME|TIME\\$|TOPCMD|TOPDOT|TRUNC|UNPROTECTMACRO|UPPER\\$|VAL|VAL\\$|VARLOCK|VERSION|VERSION\\$|WHILE|WINMOVE|WINSIZE)\\s",
+					"name": "support.function.chemmac"
+				},
+				{
+					"match": "^[\\s]*(?i:getregvalue|setregvalue|lbcmd2|FMGR|NOTEPAD|PRINTERSETUP|RUNMAC|SID|STARTLOG|STOPLOG|VARIABLES|VER|BLANKREP|CLOSEAPP|DETREP|DQEDDA|DQEDIT|GETSYSTEMRES|GETWINDIR\\$|HSIMREP|MSCANREP|PARSEFILE|PRNOPT|REVSTR\\$|SCANISREP|SCANTREP|SETDEF|VSIMREP)\\s",
+					"name": "support.function.chemmac"
+				}
+			]
+		},
+		"keywords": {
+			"patterns": [{
+				"name": "keyword.control.chemmac",
+				"match": "(?<!\\w)(?i:(if|then|else|endif|while|do|endwhile|return|(?:on[ _]error)|(?:generate[ _]error)))(?![\\w\\$])" 
+			},
+			{
+				"name": "constant.language.chemmac",
+				"match": "(?<!\\w)(?i:on|off|yes|no|true|false)(?![\\w\\$])"
+			}
+			]
+		},
+		"variables": {
+			"patterns": [
+			{
+				"name": "support.function.chemmac",
+				"match": "[_a-zA-Z][_a-zA-Z0-9]*[\\$]?(?=\\()"
+			},
+			{"include": "#reservedVariables"},
+			{"include": "#systemVariables"},
+			{
+				"name": "variable.other.chemmac",
+				"match": "[_a-zA-Z][_a-zA-Z0-9]*[\\$]?"
+			}
+			]
+		},
+		"reservedVariables": {
+			"patterns": [
+				{
+					"match": "(?<!\\w)(?i:_ActBarcode\\$|_AlsBottle|_AlsBottle2|_AlsID|_AutoFile\\$|_AutoPath\\$|_AppName\\$|_Button|_CheckBar|_CopyMeth|_CPStatus|_CurrentVer|_DaCode|_DaDDE\\$|_DaErr|_DaErrMsg\\$|_DaMenu|_DaMsg\\$|_DaMenu|_DaState|_DaWinId|_DataFile\\$|_DataFile2\\$|_DataName\\$|_DataName2\\$|_DataPath\\$|_DateAcquired\\$|_DDEName\\$|_EditAcq|_EditDa|_EditTop|_Error|_ErrMsg\\$|_ExePath\\$|_ExpBarcode\\$|_ExpBarcode2|_GCID|_HelpFile\\$|_HelpPath\\$|_InjPerVial|_Inlet\\$|_InsCtlCode|_InsCtlDDE\\$|_InsCtlErr|_InsCtlErrMsg\\$|_InsCtlMenu|_InsCtlMsg\\$|_InsCtlState|_InsCtlWinId|_Inst|_InstName\\$|_InstNum|_InstPath\\$|_LevelId\\$|_LibPath\\$|_LineStat|_MethFile\\$|_MethPath\\$|_MethVer|_MiscInfo\\$|_MiscInfo2\\$|_MoreSamp|_MSCont|_MSID|_Multiplr|_Operator\\$|_OrgMethFile\\$|_OverWrite|_PostCmd\\$|_PostSeqCmd\\$|_PreCmd\\$|_PreSeqCmd\\$|_Replicate|_Replicate2|_RunAcq|_RunCount|_RunDa|_RunPost|_RunPre|_RunType|_SampAmt|_SaveFlag|_SaveMeth\\$|_SeqArgs|_SeqArgs2|_SeqComment\\$|_SeqFile\\$|_SeqIndex|_SeqIndex2|_SeqInj|_SeqLine|_SeqPath\\$|_SeqRunCount|_SeqStr\\$|_SeqTimeStamp\\$|_SkipAcq|_TempPath\\$|_TopWinId|_TuneData|_TunePath\\$|_UpdRf|_WindowID|_drugpath\\$|_methtype\\$|_inipath\\$)(?![\\w\\$])",
+					"name": "variable.other.reserved.chemmac"
+				}
+			]
+		},
+		"systemVariables": {
+			"patterns": [
+				{
+					"match": "(?<!\\w)(?i:A1\\$|A2\\$|A3\\$|AbsPeakHeight|Amt_Units\\$|AutoIntItem|Barcode2\\$|BasePeak1|Bl0|Bl1|Boil_Pt|BslPeakHeight|Cal_Fit|Cal_ISTD|Cal_Peaks|Cal_Pk_Amt|Calculated|Cal_Pk_Found|Cal_Pk_Num|Cal_Pk_Ret|Cal_TR|Cal_Title\\$|Cal_UpdTime\\$|CapData|CapDataPts|CapMax|CapMean|CapMin|CapStdDev|CapTime|Cas_Hit[0-9]+|Cas_Hits|Cas_Num\\$|CasNo\\$|Chemical|Cavg|Cconc|CIConfigured|ClFl\\$|Clid\\$|CmdLineState|Coef[0-2]|Calibration|Company_ID\\$|Confidm_z|CpndType\\$|Cresp|DDS|DefSampAmt|DirectPr|Do_Print)(?![\\w\\$])",
+					"name": "variable.other.system.chemmac"
+				},
+				{
+					"match": "(?<!\\w)(?i:EdpDefPos|End_Time|Entry_Num|EntryNo|Eqn1\\$|Eqn2\\$|Exp_Rt_Hi|Exp_Rt_Lo|File_End|File_Start|File_Type|FilePrint_Lines|FilePrompt|Font\\$|FontAnn|FontAxis|FontTitle|Graphics_On|HEDConfigured|Height_Quant|Hit|Hit_Name\\$|Inject_Time|Int[01]|IP|IsoAbund[1-3]|IsoMass[1-3]|IStd_Amt|IStd_Area|JobName\\$|Label_Peaks_Thr|LastPrint\\$|Lcv|Lib\\$|LogToDB|Mat[aAbB]Lo|Mat[aAbB]Hi|Mat[aAbB]Rpd|Mat[aAbB]Mdl|MatSpk|MaxA|Melt_Pt|MethComment[0-9]{1,3}\\$|MinA|Mi_Used|Misc_Info\\$|Mol_Formula\\$|Mol_Wt|MsAcq_State|MsDbName\\$|Multiplier|MzRange)(?![\\w\\$])",
+					"name": "variable.other.system.chemmac"
+				},
+				{
+					"match": "(?<!\\w)(?i:N[4-9]|NGroups|NIons|NObjects|NPeaks|NPoints|NRfWin|NRfWin_TP|NTimeRefs|Num_Hits|NumScanPeaks|OnFlagLabel\\$|OpticsConfigure|OrientPr|Orphan|PageNum|PBMShowDiff|PctSCWin|Peak_Area|PeakHeight|PeakMax[1-3]|PeakMin[1-3]|Peakm_z[1-3]|Peak_Name\\$|Peak_Sig|Peak_Type|Peak_Width|PeakWidth[1-3]|Percent_Events\\$|Percent_File\\$|Percent_Method|Percent_Printer|Percent_Screen|Percent_Type|PlotFont|Pk_Area|Pk_End_BLine|Pk_Start_BLine|PreCursor[1-3]|PrintCustReport|ProfData[1-3]|ProfDataPts[1-3]|PRLibName\\$|PRMatches|PRMaxMatches|PRNumMatches|PRSpectrum|PRSubtract|PW10[1-3])(?![\\w\\$])",
+					"name": "variable.other.system.chemmac"
+				},
+				{
+					"match": "(?<!\\w)(?i:Q[123]|Q[123]_HiRat|Q[123]_LoRat|Q[123]_Pk_Area|Q[123]_Pk_Ret|Q[123]_Pu|Q[123]_Rr|Q[123]_Sum|Q[123]Events\\$|QDBWinWidth|QDB_Insert|QDel|QHits|QHits_Max|Qrint_Print|QuadMax|Qual_Apex|Qual_Edit\\$|Qual_Events\\$|Qual_File\\$|Qual_Hit[12]|Qual_Lib[123]\\$|Qual_Method|Qual_Printer|Qual_RepType|Qual_Screen|Qual_Time|Quality|Quant_Detailed|Quant_File\\$|QuantItems|Quant_Method|Quant_Printer|Quant_Screen|Quant_Select|QValue|Q_XC[FI]|Q_XCResp)(?![\\w\\$])",
+					"name": "variable.other.system.chemmac"
+				},
+				{
+					"match": "(?<!\\w)(?i:RampData|RampDataPts|RampMax|Ratio_Method|RecalStat|Ref_Name\\$|RefWin|RefWin_Tp|ReInt|Ret_Index|Ret_Time|RF|Rho|RT_Delta|RTWinMod|Runlength|Scan_Num|ScanAbund[123]|ScanBaseAbund|ScanBasePeak|ScanData|ScanDataPts|ScanIsoAbund[123]|ScanIsoMass[123]|ScanMass[123]|ScanNumOn|SCErrNum|SCErrString\\$|SCTimeOut|SCWin|SequenceFlag|Seq_Trace|Sig_Num|SigMin|SigMax|Size|Snapshot|Spectral_Window|StackState|Start_Scan|Stop_Scan|Start_Time|StdMenu|Suppress|Surrogate)(?![\\w\\$])",
+					"name": "variable.other.system.chemmac"
+				},
+				{
+					"match": "(?<!\\w)(?i:T[01]|TabFooter\\$|TargMass|TgtEvents\\$|Target[1-6]|TR_Corr|Time|TRun_Duration|TRun_NScans|TuneFileName\\$|TuneFilePath\\$|TuneSize|TuneTraceName\\$|TuneTracePath\\$|TuneType\\$|Type|Unc_Tp|Uqr|UseQIons|UseRteInt|Valley[123]|Value|ValvePrompt|Window_Drag|Xval|Xhigh|Xlow|Yval|Ylow|Yhigh)(?![\\w\\$])",
+					"name": "variable.other.system.chemmac"
+				},
+				{
+					"match": "(?<!\\w)(?i:calplot|data\\$|drticmin|drticmax|drugrep|formrep|meth\\$|normion|ov_ions|pageno|print_dtic|RRT|sigline|title_on_win)(?![\\w\\$])",
+					"name": "variable.other.system.chemmac"
+				}
+			]
+		},
+		"strings": {
+			"patterns": [{
+					"name": "string.quoted.double.chemmac",
+					"begin": "\"",
+					"end": "\"",
+					"patterns": [{
+						"name": "constant.character.accelerator.chemmac",
+						"match": "&[a-zA-Z0-9]"
+					},
+					{
+						"name": "constant.character.escape.chemmac",
+						"match": "\\\\[#%\\\\]"
+					}
+					]
+				},
+				{
+					"name": "string.quoted.single.chemmac",
+					"begin": "'",
+					"end": "'",
+					"patterns": [{
+						"name": "constant.character.accelerator.chemmac",
+						"match": "&[a-zA-Z0-9]"
+					},
+					{
+						"name": "constant.character.escape.chemmac",
+						"match": "\\\\[#%\\\\]"
+					}
+					]
+				}
+			]
+		},
+		"stringsNested": {
+			"patterns": [
+					{
+					"name": "string.quoted.other.chemmac",
+					"begin": "`",
+					"end": "'",
+					"patterns": [{
+						"name": "constant.character.accelerator.chemmac",
+						"match": "&[a-zA-Z0-9]"
+					},
+					{
+						"name": "constant.character.escape.chemmac",
+						"match": "\\\\[#%\\\\]"
+					},
+					{"include": "#stringsNested"}
+					]
+				}
+			]
+		},
+		"constants": {
+			"patterns": [
+				{
+					"name": "constant.numeric.chemmac",
+					"match": "(?<=([\\s\\[\\=\\(#,:<>+*/]))[\\-]?[0-9]+[\\.]?[0-9]*(?:[eE][\\+\\-]?[0-9]+)?"
+				},
+				{
+					"name": "constant.numeric.chemmac",
+					"match": "(?<=(-))[0-9]+[\\.]?[0-9]*(?:[eE][\\+\\-]?[0-9]+)?"
+				},
+				{
+					"name": "constant.numeric.chemmac",
+					"match": "(?<=([\\s\\[\\=\\(#,:<>+*/]))[\\-]?[\\.][0-9]+(?:[eE][\\+\\-]?[0-9]+)?"
+				},
+				{
+					"name": "keyword.operator.chemmac",
+					"match": "(?:[=<>][=<>]?)|(?:\\+)|(?:\\-)|(?:/)|(?:\\*)|(?:\\:)|(?:\\b(?i:(and|or|not))\\b)"
+				},
+				{
+					"match": ",",
+					"name": "punctuation.separator.chemmac"
+				},
+				{
+					"match": "(?:\\[)|(?:\\])|(?:\\()|(?:\\))",
+					"name": "punctuation.brace.chemmac"
+				},
+				{
+					"match": "#",
+					"name": "constant.character.chemmac"
+				}
+			]
+		},
+		"comments": {
+			"name": "comment.line.exclamation.chemmac",
+			"begin": "!",
+			"end": "\\n"
+		},
+		"entity": {
+			"patterns": [{
+				"match": "^[\\s]*(?i:(name))[\\s]+?([a-zA-Z_][a-zA-Z0-9_]*[\\$]?)",
+				"captures": {
+					"1": {
+						"name": "storage.modifier.macro.chemmac"
+					},
+					"2": {
+						"name": "entity.name.type.macro.chemmac"
+					}
+				}
+			}
+			]
+		},
+		"storage": {
+			"patterns":[{
+				"begin": "^[\\s]*?(?i:(parameter))\\s",
+				"beginCaptures": {
+					"1": {
+						"name": "storage.modifier.parameter.chemmac"
+					}
+				},
+				"end": "$",
+				"patterns": [{
+					"name": "keyword.operator.chemmac",
+					"match": "\\b(?i:(default|def|d|byname))\\b"
+				},
+				{
+					"match": "(?<=,)[\\s]*([a-zA-Z_][a-zA-Z0-9_]*[\\$]?)",
+					"captures": {
+						"1": {
+							"name": "variable.parameter.chemmac"
+						}
+					}
+				},
+				{
+					"match": "(?<=(?i:parameter)[\\s])[\\s]*([a-zA-Z_][a-zA-Z0-9_]*[\\$]?)",
+					"captures": {
+						"1": {
+							"name":"variable.parameter.chemmac"
+						}
+					}
+				},
+				{ "include": "#staticRules" },
+				{"include": "#keywords"},
+				{"include": "#variables"}
+				]
+			},
+			{
+				"begin": "^[\\s]*?(?i:(local))\\s",
+				"beginCaptures": {
+					"1": {
+					"name": "storage.modifier.chemmac"
+					}
+				},
+				"end": "$",
+				"patterns": [
+				{ "include": "#staticRules" },
+				{"include": "#keywords"},
+				{"include": "#variables"}
+				]
+			},
+			{
+				"begin": "^[\\s]*(?i:(remove))\\s",
+				"beginCaptures": {
+					"1": {
+						"name": "storage.modifier.chemmac"
+					}
+				},
+				"end": "$",
+				"patterns": [
+					{"include": "#keywords"},
+					{"include": "#staticRules"},
+					{
+						"match": "[_a-zA-Z][_a-zA-Z0-9]*[\\$]?",
+						"name": "entity.name.chemmac"
+					}
+				]
+			}
+			]
+		},
+		"statements": {
+			"patterns": [
+			{"include": "#commandList"},
+			{"include": "#reservedVariables"},
+			{"include": "#systemVariables"},
+			{
+				"begin": "^[\\s]*([a-zA-Z_][a-zA-Z0-9_]*[\\$]?)\\s++(?![\\[\\=])",
+				"beginCaptures": {
+					"1": {
+						"name": "entity.name.class.macro.chemmac"
+					}
+				},
+				"end": "$",
+				"patterns": [
+					{"include": "#keywords"},
+					{"include": "#staticRules"},
+					{"include": "#variables"}
+				]
+			},
+			{
+				"begin": "^[\\s]*([a-zA-Z_][a-zA-Z0-9_]*[\\$]?)[\\s]*(?=[\\[\\=])",
+				"beginCaptures": {"1": {"name": "variable.other.chemmac"}},
+				"end": "$",
+				"patterns": [
+					{"include": "#keywords"},
+					{"include": "#staticRules"},
+					{"include": "#variables"}
+				]
+			}
+			]
+		},
+		"staticRules": {
+			"patterns": [
+				{
+					"include": "#strings"
+				},
+				{
+					"include": "#stringsNested"
+				},
+				{
+					"include": "#constants"
+				},
+				{
+					"include": "#comments"
+				}
+			]
+		}
+	}
+}
