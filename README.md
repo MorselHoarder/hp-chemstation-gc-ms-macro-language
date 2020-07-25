@@ -75,10 +75,3 @@ Other font styles and foreground colors are also available. More information abo
 All entities declared following the `remove` command are given the `entity.name` token. It is impossible to distinguish between macros and variables in this statement line and therefore everything will be colored the same.
 
 To submit bugs or issues please reach out through the Marketplace or through GitHub.
-
-## Release Notes
-
-### 1.0.0
-
-Initial release. 
-
