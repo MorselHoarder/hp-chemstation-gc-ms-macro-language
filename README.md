@@ -11,9 +11,9 @@ Language extension for Hewlet-Packard/Agilent's Chemstation Macro language for G
 * Custom keyword highlighting rules for all commands
 * Includes "Enhanced" and "Drug Analysis" variations
 
-![Syntax Highlighting](images/syntax1.png)
-![Syntax Highlighting](images/syntax2.png)
-![Syntax Highlighting](images/syntax3.png)
+![Syntax Highlighting](images/syntax1.PNG)
+![Syntax Highlighting](images/syntax2.PNG)
+![Syntax Highlighting](images/syntax3.PNG)
 
 
 **Auto-Indentation** of `Name`, `If`, and `While` sections.
@@ -45,7 +45,7 @@ However, feel free to use any theme you like!
 
 Both `system` and `reserved` variables have their own unique scopes. It's possible to apply a global setting just for these tokens to allow them to stand out. 
 
-![Bold](images/bold.png)
+![Bold](images/bold.PNG)
 
 Use `Ctrl+Shift+P` to open the Command Palette and search for `Preferences: Open Settings (JSON)`. Inside your `settings.json` file, add the following code:
 
