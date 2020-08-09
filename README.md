@@ -20,6 +20,9 @@ Language extension for Hewlet-Packard/Agilent's Chemstation Macro language for G
 
 ![AutoIndent](images/AutoIndent.gif)
 
+**Region Folding** now supported. Use `!region` and `!endregion` comments to fold as many lines as desired.
+
+![regionfolding](images/folding.gif)
 
 ## Requirements
  
@@ -73,5 +76,7 @@ Other font styles and foreground colors are also available. More information abo
 ## Known Issues
 
 All entities declared following the `remove` command are given the `entity.name` token. It is impossible to distinguish between macros and variables in this statement line and therefore everything will be colored the same.
+
+The Chemstation command processor supports abbreviated calls to commands and macros. Occasionally, you will see abbreviated commands colored as macros such as `draw` called by `dr`. Improvements to include some of the commonly used abbreviations are underway, but it may be impossible to include all of them. It is recommended to use the full name of all macros and command functions wherever possible. 
 
 To submit bugs or issues please reach out through the Marketplace or through GitHub.
