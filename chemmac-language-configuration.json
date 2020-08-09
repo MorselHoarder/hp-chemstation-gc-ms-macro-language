@@ -31,5 +31,11 @@
           "pattern": "^\\s*((ENDWHILE|ENDIF|ELSE|NAME)(?![\\w\\$]))[^\\n]*$",
           "flags": "i"
         }
-      }
+    },
+    "folding": {
+        "markers": {
+            "start": "\\!\\s*#?[Rr][Ee][Gg][Ii][Oo][Nn]\\b",
+            "end": "\\!\\s*#?[Ee][Nn][Dd][Rr][Ee][Gg][Ii][Oo][Nn]\\b"
+        }
+    }
 }
