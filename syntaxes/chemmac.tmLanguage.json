@@ -675,6 +675,24 @@
 						{"include": "#staticRules"},
 						{"include": "#variables"}
 					]
+				},
+				{
+					"begin": "^[\\s]*(?i:(quickq))\\s",
+					"beginCaptures": {
+						"1": {
+							"name": "support.function.chemmac"
+						}
+					},
+					"end": "$",
+					"patterns": [
+						{
+							"match": "\\b(?i:(add|focus|end|title|update|clear))\\b",
+							"name": "keyword.other.chemmac"
+						},
+						{"include": "#keywords"},
+						{"include": "#staticRules"},
+						{"include": "#variables"}
+					]
 				}
 			]
 		},
