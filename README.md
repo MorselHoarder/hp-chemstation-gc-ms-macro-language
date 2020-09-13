@@ -35,7 +35,7 @@ Includes file association for `.mac` filetypes.
 
 ## Recommendations
 
-Token colors are determined by theme, while token name assignments are determined by scopes set by the language extension. Scope names were chosen to ultimately provide meaningful color contrast between statements, but sometimes a theme publisher will use the same color for multiple important tokens. For example, control keywords such as `if` and `while` could be the same color as support functions like `dim` and `open`. It is recommended to use a theme that differentiates between macros, functions, variables, and control keywords to make best use of syntax highlighting. 
+Scope _colors_ are determined by theme, while scope _names_ are assigned by the language extension. Scope names were chosen to provide meaningful color contrast between statements, but sometimes a theme publisher will use the same color for multiple important scopes. For example, control keywords such as `if` and `while` could be the same color as support functions like `dim` and `open`. It is recommended to use a theme that differentiates between macros, functions, variables, and control keywords to make best use of syntax highlighting. 
 
 For reference, the themes used in the previews are, respectively:
 * [Material Theme](https://marketplace.visualstudio.com/items?itemName=Equinusocio.vsc-material-theme) by Mattia Astorino
