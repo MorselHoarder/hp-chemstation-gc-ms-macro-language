@@ -1,5 +1,3 @@
-# HP-Chemstation GC/MS Macro Language
-
 Provides syntax highlighting support and other features for Hewlet-Packard/Agilent Chemstation Macro language for GC-GC/MS systems. Covers MSD Chemstation and Enviroquant versions up to 2010. 
 
 ## Features
