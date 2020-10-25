@@ -18,7 +18,7 @@
         "email": "schult.andrew@gmail.com"
     },
     "homepage": "https://github.com/MorselHoarder/hp-chemstation-gc-ms-macro-language/blob/master/README.md",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "engines": {
         "vscode": "^1.46.0"
     },
