@@ -1009,8 +1009,7 @@
 				]
 			},
 			{
-				"begin": "^[\\s]*([a-zA-Z_][a-zA-Z0-9_]*[\\$]?)[\\s]*(?=[\\[\\=])",
-				"beginCaptures": {"1": {"name": "variable.other.chemmac"}},
+				"begin": "^(?=[\\s]*+([a-zA-Z_][a-zA-Z0-9_]*+[\\$]?)[\\s]*+[\\[\\=])",
 				"end": "$",
 				"patterns": [
 					{"include": "#keywords"},
