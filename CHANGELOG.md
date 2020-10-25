@@ -10,3 +10,7 @@ All notable changes to the "hp-chemstation-gc-ms-macro-language" extension will 
 ## 1.1.0 - 08/08/20
 
 - Added region folding
+
+## 1.1.1 - 10/25/20
+
+- Fixed bug where system/reserved tokens would not be assigned correctly. 
