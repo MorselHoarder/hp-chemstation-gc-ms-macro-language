@@ -78,15 +78,13 @@
 				"beginCaptures": {"1": {"name": "storage.modifier.function.chemmac"}},
 				"end": "(?=\\!)|$",
 				"patterns": [
+					{"include": "#keywords"},
 					{"include": "#staticRules"},
 					{
 						"match": "(?<=[\\s,])(?i:(g|go))\\b",
 						"name": "keyword.other.chemmac"
 					},
-					{
-						"name": "variable.other.chemmac",
-						"match": "[_a-zA-Z][_a-zA-Z0-9]*[\\$]?"
-					}
+					{"include": "#variables"}
 				]
 			},
 			{
@@ -103,10 +101,6 @@
 					{
 						"name": "support.function.chemmac",
 						"match": "[_a-zA-Z][_a-zA-Z0-9]*[\\$]?[\\s]+(?![\\[\\=])"
-					},
-					{
-						"name": "variable.other.chemmac",
-						"match": "[_a-zA-Z][_a-zA-Z0-9]*[\\$]?[\\s]*(?=[\\[\\=])"
 					},
 					{"include": "#variables"}
 				]
