@@ -697,7 +697,7 @@
 					"name": "support.function.chemmac"
 				},
 				{
-					"match": "^[\\s]*(?i:CREATEWINDOW|CSADDSTRUCT|CSATTACH|CSCOPY|CSCOPY|CSCOPY|CSCOPY|CSCREATE|CSCREATE|CSDRAWOPTS|CSEXISTS|CSEXISTS|CSLIBS|CSMFATTACH|CSMFATTACH|CSMFCREATE|CSMOLCREATE|CSSUBSET|GETWINDOWTEXT\\$|SETWINDOWLOC|SETWINDOWLOC|SETWINDOWTEXT|SHOWWINDOW)\\s",
+					"match": "^[\\s]*(?i:CREATEWINDOW|CSADDSTRUCT|CSATTACH|CSCOPY|CSCREATE|CSCREATE|CSDRAWOPTS|CSEXISTS|CSEXISTS|CSLIBS|CSMFATTACH|CSMFATTACH|CSMFCREATE|CSMOLCREATE|CSSUBSET|GETWINDOWTEXT\\$|SETWINDOWLOC|SETWINDOWLOC|SETWINDOWTEXT|SHOWWINDOW)\\s",
 					"name": "support.function.chemmac"
 				},
 				{
@@ -910,7 +910,7 @@
 						"name": "storage.modifier.macro.chemmac"
 					},
 					"2": {
-						"name": "entity.name.type.macro.chemmac"
+						"name": "entity.name.class.macro.chemmac"
 					}
 				}
 			}
