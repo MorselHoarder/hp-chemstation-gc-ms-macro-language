@@ -790,7 +790,7 @@
 					"name": "variable.other.system.chemmac"
 				},
 				{
-					"match": "(?<!\\w)(?i:EdpDefPos|End_Time|Entry_Num|EntryNo|Eqn1\\$|Eqn2\\$|Exp_Rt_Hi|Exp_Rt_Lo|File_End|File_Start|File_Type|FilePrint_Lines|FilePrompt|Font\\$|FontAnn|FontAxis|FontTitle|Graphics_On|HEDConfigured|Height_Quant|Hit|Hit_Name\\$|Inject_Time|Int[01]|IP|IsoAbund[1-3]|IsoMass[1-3]|IStd_Amt|IStd_Area|JobName\\$|Label_Peaks_Thr|LastPrint\\$|Lcv|Lib\\$|LogToDB|Mat[aAbB]Lo|Mat[aAbB]Hi|Mat[aAbB]Rpd|Mat[aAbB]Mdl|MatSpk|MaxA|Melt_Pt|MethComment[0-9]{1,3}\\$|MinA|Mi_Used|Misc_Info\\$|Mol_Formula\\$|Mol_Wt|MsAcq_State|MsDbName\\$|Multiplier|MzRange)(?![\\w\\$])",
+					"match": "(?<!\\w)(?i:EdpDefPos|End_Time|Entry_Num|EntryNo|Eqn1\\$|Eqn2\\$|Exp_Rt|Exp_Rt_Hi|Exp_Rt_Lo|File_End|File_Start|File_Type|FilePrint_Lines|FilePrompt|Font\\$|FontAnn|FontAxis|FontTitle|Graphics_On|HEDConfigured|Height_Quant|Hit|Hit_Name\\$|Inject_Time|Int[01]|IP|IsoAbund[1-3]|IsoMass[1-3]|IStd_Amt|IStd_Area|JobName\\$|Label_Peaks_Thr|LastPrint\\$|Lcv|Linear_wt|Lib\\$|LogToDB|Mat[aAbB]Lo|Mat[aAbB]Hi|Mat[aAbB]Rpd|Mat[aAbB]Mdl|MatSpk|MaxA|Melt_Pt|MethComment[0-9]{1,3}\\$|MinA|Mi_Used|Misc_Info\\$|Mol_Formula\\$|Mol_Wt|MsAcq_State|MsDbName\\$|Multiplier|MzRange)(?![\\w\\$])",
 					"name": "variable.other.system.chemmac"
 				},
 				{
